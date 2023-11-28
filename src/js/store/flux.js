@@ -21,8 +21,11 @@ const getState = ({ getStore, setStore, getActions }) => {
 					}
 				})
 					.then(res => res.json())
-					.then(response => console.log("Success:", response))
-					.catch(error => console.error("Error:", error));
+					.then(res => {
+						if (res.ok) {
+							getActions().getData();
+						}
+					});
 			},
 			addidDelete: id => {
 				setStore({ idDelete: id });
@@ -44,11 +47,15 @@ const getState = ({ getStore, setStore, getActions }) => {
 					body: JSON.stringify(contact)
 				})
 					.then(res => res.json())
-					.then(results => console.log(setStore({ contact: results }), "estoy en setStore"))
-					.catch(error => console.log("Error", error));
+					.then(res => {
+						if (res.ok) {
+							getActions().getData();
+						}
+					});
 			},
 			getContact: contact => {
 				setStore({ contactToEdit: contact });
+
 			}
 		}
 	};

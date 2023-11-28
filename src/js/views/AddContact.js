@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const AddContact = () => {
 	const { store, actions } = useContext(Context);
@@ -17,6 +17,7 @@ export const AddContact = () => {
 		console.log("ejecutando submit");
 		actions.addContact(user);
 	};
+	const navigate = useNavigate();
 	return (
 		<div className="container">
 			<div>
@@ -32,13 +33,13 @@ export const AddContact = () => {
 					</div>
 					<div className="form-group">
 						<label>Phone</label>
-						<input type="phone" className="form-control" placeholder="Enter phone" name="address" />
+						<input type="phone" className="form-control" placeholder="Enter phone" name="phone" />
 					</div>
 					<div className="form-group">
 						<label>Address</label>
-						<input type="text" className="form-control" placeholder="Enter address" name="phone" />
+						<input type="text" className="form-control" placeholder="Enter address" name="address" />
 					</div>
-					<button type="submit" className="btn btn-primary form-control">
+					<button type="submit" onClick={() => navigate(-1)} className="btn btn-primary form-control">
 						save
 					</button>
 					<Link className="mt-3 w-100 text-center" to="/">

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link, } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 
 export const EditContact = () => {
 	const { store, actions } = useContext(Context);
@@ -20,8 +21,9 @@ export const EditContact = () => {
 	const handleSubmit = event => {
 		event.preventDefault();
 		actions.editContact(store.contactToEdit.id, user);
-	};
 
+	};
+	const navigate = useNavigate();
 	return (
 		<div className="container">
 			<div>
@@ -53,8 +55,8 @@ export const EditContact = () => {
 							type="phone"
 							className="form-control"
 							placeholder="Enter phone"
-							name="address"
-							defaultValue={user.phone}
+							name="phone"
+							defaultValue={user.address}
 						/>
 					</div>
 					<div className="form-group">
@@ -63,14 +65,14 @@ export const EditContact = () => {
 							type="text"
 							className="form-control"
 							placeholder="Enter address"
-							name="phone"
-							defaultValue={user.address}
+							name="address"
+							defaultValue={user.phone}
 						/>
 					</div>
-					<button type="submit" className="btn btn-primary form-control">
+					<button type="submit" onClick={() => navigate(-1)} className="btn btn-primary form-control" >
 						save
 					</button>
-					<Link className="mt-3 w-100 text-center" to="/">
+					<Link className="Volver mt-3 w-100 text-center" to="/">
 						or get back to contacts
 					</Link>
 				</form>
